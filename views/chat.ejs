@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="chat.css" />
+		<title>Welcome</title>
+	</head>
+	<body>
+		<div class="background">
+            <div class="form-card">
+                <div class="form-title">
+                    Welcome 👋 
+                </div>
+
+                <div class="form-subtitle">
+                    Select your username to get started
+                </div>
+
+                <div class="auth">
+                    <div class="auth-label">Username</div>
+                    <input class="auth-input" name="username" id="username" />
+                    <button class="auth-button" type="submit"  onclick="createConnection()"> <a href="chatting">Authenticate</a> </Button>
+                </div>
+            </div>
+		</div>
+
+        <script>
+            function createConnection(){
+                var username = document.getElementById('username').value;
+    
+                fetch('/login', {
+                    method:'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }, 
+                    body: JSON.stringify({ username }),
+                })
+                .then(response => response.JSON())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        </script>
+	</body>
+</html>

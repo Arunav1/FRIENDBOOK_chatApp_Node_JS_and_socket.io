@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Chat World</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="login-text">
+          <button class="cta"><i class="fas fa-chevron-down fa-1x"></i></button>
+          <div class="text">
+            <a href="">Login</a>
+            <hr>
+            <br>
+            <input type="text" id="email" placeholder="E-mail">
+            <br>
+            <input type="password" id="password" placeholder="Password">
+            <br>
+            <button class="login-btn" onclick="login()"><a href="/login">Log In </a></button>
+            <br>
+          </div>
+        </div>
+        <div class="call-text">
+          <h1>Welcome to <span>FRIEND</span>BOOK</h1>
+          <button>Join the Community</button>
+        </div>
+      
+      </div>
+
+      <script>
+        var cta = document.querySelector(".cta");
+        var check = 0;
+
+        cta.addEventListener('click', function(e){
+            var text = e.target.nextElementSibling;
+            var loginText = e.target.parentElement;
+            text.classList.toggle('show-hide');
+            loginText.classList.toggle('expand');
+            if (check == 0) {
+                cta.innerHTML = "<i class=\"fas fa-chevron-up\"></i>";
+                check++;
+            } else {
+                cta.innerHTML = "<i class=\"fas fa-chevron-down\"></i>";
+                check = 0;
+            }
+        });
+
+        function login(){
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            fetch('/', {
+                method:'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                }, 
+                body: JSON.stringify({email, password }),
+            })
+            .then(response => response.JSON())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+      </script>
+</body>
+</html>
